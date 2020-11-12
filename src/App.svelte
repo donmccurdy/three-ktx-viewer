@@ -32,9 +32,7 @@
 		GPU memory cost and upload time, compared to traditional image formats.
 		This viewer supports KTX 2.0 files containing Basis Universal texture
 		codecs. 1D textures, cubemaps, and 3D array textures not yet supported.
-		Made with <a href="http://threejs.org/" target="_blank"><i>three.js {threeRevision}</i></a>.
 	</p>
-	<p><small></small></p>
 
 	{#if textureData}
 		<Preview textureData={textureData}></Preview>
@@ -47,7 +45,18 @@
 		</div>
 	{/if}
 
-	<img alt="KTX" src="ktx_logo.png">
+	<footer>
+		<img alt="KTX" src="ktx_logo.png">
+		<p>
+		<em>
+			<a href="http://threejs.org/" target="_blank">three.js {threeRevision}</a>
+			•
+			<a href="https://github.com/donmccurdy/three-ktx-viewer" target="_blank">source code</a>
+			•
+			<a href="https://github.com/donmccurdy/three-ktx-viewer/blob/main/LICENSE" target="_blank">mit license</a>
+		</em>
+		<p>
+	</footer>
 </main>
 
 <style>
@@ -65,7 +74,7 @@
 		font-weight: 100;
 	}
 
-	p {
+	main > p {
 		max-width: 600px;
 		margin: 4em auto;
 		text-align: left;
@@ -76,6 +85,11 @@
 	img {
 		margin-top: 4em;
 		width: 100px;
+	}
+
+	footer,
+	footer p {
+		text-align: center;
 	}
 
 	@media (min-width: 640px) {
