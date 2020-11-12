@@ -14,11 +14,10 @@
     let camera: OrthographicCamera;
     let material: MeshBasicMaterial;
     let loader: KTX2Loader;
-    let isReady = false;
 
-    // Reactive binding: executes when 'isReady' or 'textureData' change.
+    // Reactive binding: executes when 'loader' or 'textureData' change.
     $: {
-        if (isReady) decodeTexture(textureData);
+        if (loader) decodeTexture(textureData);
     }
 
     onMount(async () => {
@@ -49,10 +48,6 @@
 
         // Texture.
         loader = new KTX2Loader().detectSupport(renderer);
-        loader.initModule();
-
-        await loader['basisModulePending']; // TODO(bug)
-        isReady = true;
     });
 
     function decodeTexture(textureData: ArrayBuffer) {
