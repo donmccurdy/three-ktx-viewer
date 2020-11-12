@@ -1,9 +1,12 @@
 <script lang="ts">
     import { onMount } from 'svelte';
-    import { WebGLRenderer, PlaneBufferGeometry, Mesh, Scene, OrthographicCamera, MeshBasicMaterial, AmbientLight, BufferGeometry, DoubleSide } from 'three';
+    import { WebGLRenderer, PlaneBufferGeometry, Mesh, Scene, OrthographicCamera, MeshBasicMaterial, AmbientLight, BufferGeometry } from 'three';
     import { KTX2Loader } from 'three/examples/jsm/loaders/KTX2Loader.js';
 
     export let textureData: ArrayBuffer;
+
+    let WIDTH: number;
+    let HEIGHT: number;
 
     let previewEl: HTMLElement;
     let renderer: WebGLRenderer;
@@ -19,9 +22,12 @@
     }
 
     onMount(async () => {
+        WIDTH = window.innerWidth - 80;
+        HEIGHT = 600;
+
         // Renderer.
         renderer = new WebGLRenderer()
-        renderer.setSize(800, 600);
+        renderer.setSize(WIDTH, HEIGHT);
         renderer.setClearColor(0xF0F0F0);
         previewEl.appendChild(renderer.domElement);
 
@@ -34,7 +40,7 @@
         scene.add(new AmbientLight());
 
         // Camera.
-        const xMag = ((window.innerWidth / window.innerHeight) / 2) * 1.05;
+        const xMag = ((WIDTH / HEIGHT) / 2) * 1.05;
         const yMag = 0.5 * 1.05;
         camera = new OrthographicCamera(-xMag, xMag, yMag, -yMag, 0.5, 10);
         camera.position.set(0, 0, 5);
